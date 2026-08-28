@@ -1,5 +1,5 @@
 from app import app
-from models import Pessoas
+from models import Pessoas, Usuarios
 
 def insere_pessoas():
     pessoa = Pessoas(nome='Leo', idade=23)
@@ -26,9 +26,20 @@ def exclui_pessoa():
     if pessoa:
         pessoa.delete()
 
+def insere_usuario(login, senha):
+    usuario = Usuarios(login=login, senha=senha)
+    usuario.save()
+
+def consulta_todos_usuarios():
+    usuarios = Usuarios.query.all()
+    print(usuarios)
+
 if __name__ == '__main__':
     with app.app_context():
         #insere_pessoas()
         # altera_pessoa()
         # exclui_pessoa()
-        consulta_pessoas()
+        #consulta_pessoas()
+        insere_usuario('Jaboticaba','1234')
+        insere_usuario('Renan','4321')
+        consulta_todos_usuarios()
